@@ -1,0 +1,10 @@
+{
+  "name": "network-growth-copilot",
+  "description": "Capture people after events, get told who to follow up with, get a draft in your voice. You send. Three skills plus a guided setup.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Esteban Pinto"
+  },
+  "license": "MIT",
+  "keywords": ["networking", "follow-up", "relationships", "outreach", "second-brain"]
+}

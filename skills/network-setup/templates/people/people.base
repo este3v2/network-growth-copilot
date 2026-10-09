@@ -1,0 +1,90 @@
+filters:
+  and:
+    - file.inFolder("people")
+    - status != null
+properties:
+  where-met:
+    displayName: Where met
+  city:
+    displayName: City
+  country:
+    displayName: Country
+  date:
+    displayName: Date met
+  company:
+    displayName: Company
+  linkedin:
+    displayName: LinkedIn
+  email:
+    displayName: Email
+  status:
+    displayName: Status
+  commercial_signal:
+    displayName: Commercial signal
+  commercial_state:
+    displayName: Commercial state
+  commercial_trigger:
+    displayName: Commercial trigger
+  notes:
+    displayName: Notes
+views:
+  - type: table
+    name: All people
+    order:
+      - file.name
+      - company
+      - city
+      - country
+      - where-met
+      - date
+      - status
+      - commercial_signal
+      - commercial_state
+      - commercial_trigger
+      - linkedin
+      - email
+      - notes
+    sort:
+      - property: date
+        direction: DESC
+  - type: table
+    name: Commercial signals
+    filters: commercial_signal != null
+    order:
+      - file.name
+      - company
+      - status
+      - commercial_signal
+      - commercial_state
+      - commercial_trigger
+    sort:
+      - property: commercial_state
+        direction: ASC
+  - type: table
+    name: By status
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - city
+      - country
+      - where-met
+      - status
+      - commercial_signal
+      - commercial_state
+  - type: table
+    name: Notes
+    order:
+      - file.name
+      - notes
+  - type: cards
+    name: Kanban (by status)
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - company
+      - where-met
+      - date

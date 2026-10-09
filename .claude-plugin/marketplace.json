@@ -1,0 +1,14 @@
+{
+  "name": "network-growth-copilot",
+  "owner": {
+    "name": "Esteban Pinto"
+  },
+  "plugins": [
+    {
+      "name": "network-growth-copilot",
+      "source": "./",
+      "description": "Capture people after events, get told who to follow up with, get a draft in your voice. You send."
+    }
+  ],
+  "description": "Network Growth Copilot: follow up with the people you meet, in your own voice."
+}

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Network Growth Copilot Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#edf1ef; --surface:#f8faf9; --ink:#0e1d1a; --mute:#4d5f5b; --line:#cfd8d5;
+  --accent:#1f3fd6; --accent-ink:#fff; --warm:#d9622b; --ok:#0f7a5c; --ok-soft:#dcefe8; --code:#0e1d1a; --code-ink:#e8f0ed;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1715; --surface:#13221f; --ink:#e8f0ed; --mute:#98aca6; --line:#26403a;
+  --accent:#7d95ff; --accent-ink:#0c1715; --warm:#f08a58; --ok:#4fd1a1; --ok-soft:#10281f; --code:#07100e; --code-ink:#e8f0ed; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1715; --surface:#13221f; --ink:#e8f0ed; --mute:#98aca6; --line:#26403a;
+  --accent:#7d95ff; --accent-ink:#0c1715; --warm:#f08a58; --ok:#4fd1a1; --ok-soft:#10281f; --code:#07100e; --code-ink:#e8f0ed; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px}
+.wrap{max-width:900px;margin-inline:auto;padding-block:40px 64px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,54px);line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.6vw,32px);font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+h3{font-size:18px;font-weight:700;margin-bottom:4px}
+p{margin:0 0 12px;max-width:62ch}
+.lead{font-size:19px;color:var(--mute)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:14px}
+section{padding-top:48px}
+.sub{color:var(--mute);margin-bottom:18px}
+
+/* loop */
+.loop{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px}
+.loop>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0;position:relative}
+.loop b{font-family:var(--display);display:block;font-size:17px}
+.loop span{font-size:14px;color:var(--mute)}
+.loop .you{background:var(--ok-soft);border-color:var(--ok)}
+.loop .you span{color:var(--ink)}
+
+/* steps */
+.steps{display:grid;gap:12px}
+.step{display:grid;grid-template-columns:40px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.n{width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:700 17px var(--display)}
+.step>div{min-width:0}
+.cmd{display:flex;gap:8px;align-items:stretch;margin-top:8px}
+.cmd code{flex:1;min-width:0;background:var(--code);color:var(--code-ink);font:400 13.5px/1.5 var(--mono);padding:10px 12px;border-radius:8px;overflow-x:auto;white-space:pre}
+button.copy{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 13px var(--body);border-radius:8px;padding:0 14px;cursor:pointer}
+button.copy:hover{border-color:var(--accent)}
+button.copy:focus-visible,a:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.hint{font-size:14px;color:var(--mute);margin:8px 0 0}
+
+/* chat */
+.chat{display:grid;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.q,.a{max-width:min(520px,92%);padding:9px 13px;border-radius:14px;font-size:15px}
+.q{background:var(--code);color:var(--code-ink);border-bottom-left-radius:4px;justify-self:start}
+.a{background:var(--ok-soft);border:1px solid var(--ok);border-bottom-right-radius:4px;justify-self:end}
+.chat .tag{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.skill{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.skill .job{color:var(--mute);font-size:15px;margin:0}
+.skill .rule{font-size:13.5px;margin:0;border-top:1px solid var(--line);padding-top:10px;color:var(--mute)}
+.say{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.say svg{flex:none;margin-top:3px;color:var(--warm)}
+.say.type svg{color:var(--accent)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--mute);margin:0 0 14px}
+.legend span{display:flex;gap:6px;align-items:center}
+
+/* rhythm */
+.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rhythm>div{border-top:3px solid var(--ink);padding-top:10px}
+.rhythm b{font-family:var(--display);font-size:17px;display:block}
+.rhythm span{font-size:14.5px;color:var(--mute)}
+
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rules>div{background:var(--ok-soft);border:1px solid var(--ok);border-radius:12px;padding:14px;font-size:15px}
+.rules b{display:block;font-family:var(--display);font-size:16px;margin-bottom:2px}
+
+@media (max-width:720px){.loop,.skills,.rhythm,.rules{grid-template-columns:1fr}.cmd{flex-direction:column}button.copy{padding:9px 14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Guide · about 15 minutes</span>
+  <h1>Network Growth Copilot</h1>
+  <p class="lead" style="margin-top:14px">Install it, answer a few questions, then talk to it. This page shows the install, what it asks you, and what to say.</p>
+  <div class="loop" role="list">
+    <div role="listitem"><b>Capture</b><span>Tell it who you met</span></div>
+    <div role="listitem"><b>Rank</b><span>Ask who is next</span></div>
+    <div role="listitem"><b>Draft</b><span>Message in your voice</span></div>
+    <div role="listitem" class="you"><b>You send</b><span>Always you. Never the agent.</span></div>
+  </div>
+</header>
+
+<section>
+  <span class="eyebrow">Install</span>
+  <h2>Two commands, one sentence.</h2>
+  <p class="sub">In Claude Code. No API keys, no accounts.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div>
+      <h3>Add the plugin</h3>
+      <div class="cmd"><code id="c1">/plugin marketplace add este3v2/network-growth-copilot</code><button class="copy" data-t="c1">Copy</button></div>
+      <div class="cmd"><code id="c2">/plugin install network-growth-copilot@network-growth-copilot</code><button class="copy" data-t="c2">Copy</button></div>
+    </div></div>
+    <div class="step"><div class="n">2</div><div>
+      <h3>Start the setup</h3>
+      <div class="cmd"><code id="c3">Set up the network growth copilot</code><button class="copy" data-t="c3">Copy</button></div>
+      <p class="hint">Claude asks a few questions, one at a time, and builds your files.</p>
+    </div></div>
+    <div class="step"><div class="n">3</div><div>
+      <h3>Talk to it</h3>
+      <p style="margin:0">Use the prompts below. That's the whole routine.</p>
+    </div></div>
+  </div>
+  <p class="hint" style="margin-top:12px">Prefer to copy files by hand? The repo's INSTALL.md has a clone-and-copy route that ends in the same setup.</p>
+</section>
+
+<section>
+  <span class="eyebrow">The setup</span>
+  <h2>Seven questions. It does the rest.</h2>
+  <p class="sub">Example answers shown. Yours will differ.</p>
+  <div class="chat" aria-label="Example setup conversation">
+    <div class="tag">Claude asks</div>
+    <div class="q">What is this network for?</div>
+    <div class="a">Meet founders in logistics who might hire us for AI work.</div>
+    <div class="q">What first name should I sign messages with?</div>
+    <div class="a">Sam</div>
+    <div class="q">Where should the contact folder live? (default ~/network/people)</div>
+    <div class="a">Default is fine.</div>
+    <div class="q">Do you use Obsidian? Then I'll add a board view.</div>
+    <div class="a">Yes.</div>
+    <div class="q">How many outreach messages a week should I count toward? Or skip.</div>
+    <div class="a">3</div>
+    <div class="q">How do you write to someone you just met? Paste two messages that sounded like you.</div>
+    <div class="a">Short, a bit dry. Never "I hope this finds you well". [pastes two messages]</div>
+    <div class="q">Who have you met recently? Names, where, company.</div>
+    <div class="a">Priya, Data Summit, Northwind. Marco, a founders dinner, Fleetly.</div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">What to say</span>
+  <h2>Three skills. Say it or type it.</h2>
+  <div class="legend">
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--warm)"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg> dictate on your phone, paste the text</span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent)"><path d="M4 7h16M4 12h16M4 17h10"/></svg> type it</span>
+  </div>
+  <div class="skills">
+
+    <div class="skill">
+      <div><span class="eyebrow" style="margin-bottom:6px">1 · Capture</span><h3>meeting-capture</h3></div>
+      <p class="job">Turns a conversation into an entry on that person's file.</p>
+      <div class="say"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>"Just met Priya at the Data Summit. She runs analytics at Northwind and her team rebuilds the same report every week. I said I'd send the case study."</span></div>
+      <div class="say type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Capture a meeting with Marco. [paste notes]</span></div>
+      <p class="rule">You get an entry to paste. It never edits an existing file.</p>
+    </div>
+
+    <div class="skill">
+      <div><span class="eyebrow" style="margin-bottom:6px">2 · Rank</span><h3>network-next</h3></div>
+      <p class="job">Says who deserves attention now, and why.</p>
+      <div class="say"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>"Who should I follow up with this week?"</span></div>
+      <div class="say type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Network next, phone overview</span></div>
+      <p class="rule">Three actions with evidence, or 15 lines to scan. Read-only.</p>
+    </div>
+
+    <div class="skill">
+      <div><span class="eyebrow" style="margin-bottom:6px">3 · Draft</span><h3>network-outreach</h3></div>
+      <p class="job">Writes one message to one person, in three tones.</p>
+      <div class="say"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>"Draft a LinkedIn message to Priya."</span></div>
+      <div class="say type"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Email Marco, thoughtful tone</span></div>
+      <p class="rule">Drafts only. You send, then paste the log line back.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">The rhythm</span>
+  <h2>Ten minutes, three moments.</h2>
+  <div class="rhythm">
+    <div><b>After each meeting</b><span>Dictate what happened. Paste the entry it hands back.</span></div>
+    <div><b>Once a week</b><span>Ask who to follow up with. Pick one or two.</span></div>
+    <div><b>When you pick someone</b><span>Ask for a draft. Edit, send, paste the log line.</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">What it keeps to</span>
+  <h2>Three rules that don't bend.</h2>
+  <div class="rules">
+    <div><b>You send</b>Nothing goes out automatically. Ever.</div>
+    <div><b>You approve</b>No file changes without you pasting it in.</div>
+    <div><b>A real hook, or silence</b>If a file has nothing specific, it says so and writes nothing generic.</div>
+  </div>
+  <p class="hint" style="margin-top:18px">Claude Code doesn't take audio, so "say it" means dictate with your phone or a voice memo and paste the text. Obsidian is optional. It only adds a board view.</p>
+</section>
+
+</div>
+<script>
+document.querySelectorAll('button.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.t),txt=el.textContent;
+    function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1400)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';setTimeout(function(){b.textContent='Copy'},1400)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback)}else{fallback()}
+  });
+});
+</script>
+</body>
+</html>
