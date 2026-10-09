@@ -91,6 +91,16 @@ tr:last-child td{border-bottom:0}
 td code{font:400 13px var(--mono);background:var(--bg);padding:1px 6px;border-radius:5px;border:1px solid var(--line)}
 td:first-child{font-weight:600;white-space:nowrap}
 @media (max-width:720px){td:first-child{white-space:normal}}
+
+/* big picture */
+pre.map{margin:22px 0 0;background:var(--code);color:var(--code-ink);border-radius:14px;padding:18px;overflow-x:auto;font:400 13.5px/1.55 var(--mono)}
+pre.map b{color:var(--warm);font-weight:500}
+pre.map i{font-style:normal;color:#8fa59f}
+.pill{display:inline-block;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mute)}
+.pill.gap{border-color:var(--warm);color:var(--warm)}
+.pill.design{border-color:var(--ok);color:var(--ok)}
+.cta-row{margin-top:14px}
+.cta-row a{color:var(--accent);font-weight:600}
 </style>
 </head>
 <body>
@@ -106,6 +116,18 @@ td:first-child{font-weight:600;white-space:nowrap}
     <div role="listitem"><b>Draft</b><span>Message in your voice</span></div>
     <div role="listitem" class="you"><b>You send</b><span>Always you. Never the agent.</span></div>
   </div>
+  <pre class="map" aria-label="Big picture of the system">YOU MEET SOMEONE                       <i>one markdown file per person</i>
+event · talk · intro  ──►  <b>meeting-capture</b>  ──►  people/ana-garcia.md
+                                              WHO · REACH · CONTEXT
+                                              <b>STAGE</b> · SIGNAL · HISTORY
+                                                   │
+ ask "who should I contact?"  ──►  <b>network-next</b>  ──►  3 actions + why now
+                                                   │  you pick one person
+ ask for a draft  ──────────────►  <b>network-outreach</b>  ──►  3 drafts + a log line
+                                                   │
+                     <b>YOU edit · YOU send · YOU paste the log line</b>
+                                                   │
+                     stage moves: next ► waiting ► engaged ► later / done</pre>
 </header>
 
 <section>
@@ -199,6 +221,21 @@ td:first-child{font-weight:600;white-space:nowrap}
 </section>
 
 <section>
+  <span class="eyebrow">People and companies</span>
+  <h2>The unit is a person. Companies hang off people.</h2>
+  <p class="sub">You often want a relationship with a company, not only with one individual. This is how the kit handles that today, and where it stops.</p>
+  <div class="tw"><table>
+    <tr><th>Question</th><th>How it works today</th></tr>
+    <tr><td>Is a company a record?</td><td>No. There is no company file. A company is the <code>company</code> field on each person who works there.</td></tr>
+    <tr><td>Can I see everyone at one company?</td><td>Yes, by filtering or sorting on <code>company</code> in the board view, or by asking "who do I know at Northwind?".</td></tr>
+    <tr><td>Does <code>network-next</code> rank companies?</td><td>No. It ranks people. Organisations are kept outside the ranking on purpose.</td></tr>
+    <tr><td>How do I track target companies or startups?</td><td>Keep a separate research note outside the contact folder: a map of companies, in groups, with the warm contacts already inside each one linked to their person file.</td></tr>
+    <tr><td>When does a company become outreach?</td><td>Only when you have a named person and a real hook. A company on the map alone never produces a message.</td></tr>
+  </table></div>
+  <p class="hint">Example from my own use: a note mapping AI companies in Australia, split into product companies and consulting firms, with "already warm" people listed first. It is a map, not an outreach queue.</p>
+</section>
+
+<section>
   <span class="eyebrow">The rhythm</span>
   <h2>Ten minutes, three moments.</h2>
   <div class="rhythm">
@@ -245,6 +282,26 @@ td:first-child{font-weight:600;white-space:nowrap}
     <div><b>A real hook, or silence</b>If a file has nothing specific, it says so and writes nothing generic.</div>
   </div>
   <p class="hint" style="margin-top:18px">Claude Code doesn't take audio, so "say it" means dictate with your phone or a voice memo and paste the text. Obsidian is optional. It only adds a board view.</p>
+</section>
+
+<section>
+  <span class="eyebrow">Not yet</span>
+  <h2>What this system is not.</h2>
+  <p class="sub">So you know what to expect, and where help would be useful. Some of these are gaps. Some are choices.</p>
+  <div class="tw"><table>
+    <tr><th>Not there</th><th></th><th>Today</th></tr>
+    <tr><td>Company records and an account view</td><td><span class="pill gap">gap</span></td><td>Company is a field on a person. Company maps live in separate notes.</td></tr>
+    <tr><td>Reply to several people in one go</td><td><span class="pill gap">gap</span></td><td>One draft per person.</td></tr>
+    <tr><td>A nudge when a contact goes quiet</td><td><span class="pill gap">gap</span></td><td>You ask who's next. Nothing runs by itself.</td></tr>
+    <tr><td>A calendar block for outreach</td><td><span class="pill gap">gap</span></td><td>A weekly habit, not a scheduled job.</td></tr>
+    <tr><td>Status and log updates written for you</td><td><span class="pill gap">gap</span></td><td>You paste the entry and change the status yourself.</td></tr>
+    <tr><td>An importer for LinkedIn or CRM exports</td><td><span class="pill gap">gap</span></td><td>Paste a list and Claude creates the files. No importer.</td></tr>
+    <tr><td>Notion or other stores</td><td><span class="pill gap">untested</span></td><td>Plain markdown folders. Obsidian adds the board view.</td></tr>
+    <tr><td>Use by a team</td><td><span class="pill gap">gap</span></td><td>Built for one person's network.</td></tr>
+    <tr><td>Sending messages for you</td><td><span class="pill design">by design</span></td><td>Never. You send every message.</td></tr>
+    <tr><td>A dashboard or CRM</td><td><span class="pill design">by design</span></td><td>Files you own and a chat you already use.</td></tr>
+  </table></div>
+  <p class="cta-row">Want one of these, or built it already? <a href="https://github.com/este3v2/network-growth-copilot/issues">Open an issue on GitHub</a> or send a pull request.</p>
 </section>
 
 </div>

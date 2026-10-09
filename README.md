@@ -50,9 +50,14 @@ Then say: **Set up the network growth copilot**. It asks a few questions and bui
 
 Claude Code or Codex, and a folder for notes. Obsidian is optional and adds a board view.
 
-## What it doesn't do yet
+## Not yet
 
-No batch replies, no reminders when a contact goes quiet, no calendar blocks. See [PATTERNS.md](PATTERNS.md).
+- **Companies:** the unit is a person. A company is a field on each contact, and company maps live in separate notes. No company records or account view.
+- No batch replies, no reminders when a contact goes quiet, no calendar blocks.
+- Status and log updates are pasted by you. No importer for LinkedIn or CRM exports.
+- Notion and other stores are untested. One person's network only, not a team tool.
+
+The full table, with what's by design, is in the [visual guide](https://este3v2.github.io/network-growth-copilot/#). Want one of these? [Open an issue](https://github.com/este3v2/network-growth-copilot/issues) or send a pull request. See also [PATTERNS.md](PATTERNS.md).
 
 ## Want it installed for you?
 
