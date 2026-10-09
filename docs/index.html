@@ -81,6 +81,16 @@ button.copy:focus-visible,a:focus-visible{outline:3px solid var(--warm);outline-
 .rules b{display:block;font-family:var(--display);font-size:16px;margin-bottom:2px}
 
 @media (max-width:720px){.loop,.skills,.rhythm,.rules{grid-template-columns:1fr}.cmd{flex-direction:column}button.copy{padding:9px 14px}}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td code{font:400 13px var(--mono);background:var(--bg);padding:1px 6px;border-radius:5px;border:1px solid var(--line)}
+td:first-child{font-weight:600;white-space:nowrap}
+@media (max-width:720px){td:first-child{white-space:normal}}
 </style>
 </head>
 <body>
@@ -97,6 +107,20 @@ button.copy:focus-visible,a:focus-visible{outline:3px solid var(--warm);outline-
     <div role="listitem" class="you"><b>You send</b><span>Always you. Never the agent.</span></div>
   </div>
 </header>
+
+<section>
+  <span class="eyebrow">Before you start</span>
+  <h2>What you need.</h2>
+  <p class="sub">Nothing to buy and nothing to sign up for, other than Claude Code itself.</p>
+  <div class="tw"><table>
+    <tr><th>Need</th><th>Required?</th><th>Notes</th></tr>
+    <tr><td>Claude Code</td><td>Yes</td><td>The CLI, desktop app or IDE extension, with a Claude plan. Codex also works with the manual route.</td></tr>
+    <tr><td>A folder for notes</td><td>Yes</td><td>Any folder. The setup creates it for you.</td></tr>
+    <tr><td>Obsidian</td><td>Optional</td><td>Only adds a board view by status. Everything else works on plain files.</td></tr>
+    <tr><td>Voice capture</td><td>Optional</td><td>Dictate on your phone and paste the text. Claude Code doesn't take audio.</td></tr>
+    <tr><td>API keys, accounts, a CRM</td><td>No</td><td>None are used anywhere in the kit.</td></tr>
+  </table></div>
+</section>
 
 <section>
   <span class="eyebrow">Install</span>
@@ -124,24 +148,18 @@ button.copy:focus-visible,a:focus-visible{outline:3px solid var(--warm);outline-
 <section>
   <span class="eyebrow">The setup</span>
   <h2>Seven questions. It does the rest.</h2>
-  <p class="sub">Example answers shown. Yours will differ.</p>
-  <div class="chat" aria-label="Example setup conversation">
-    <div class="tag">Claude asks</div>
-    <div class="q">What is this network for?</div>
-    <div class="a">Meet founders in logistics who might hire us for AI work.</div>
-    <div class="q">What first name should I sign messages with?</div>
-    <div class="a">Sam</div>
-    <div class="q">Where should the contact folder live? (default ~/network/people)</div>
-    <div class="a">Default is fine.</div>
-    <div class="q">Do you use Obsidian? Then I'll add a board view.</div>
-    <div class="a">Yes.</div>
-    <div class="q">How many outreach messages a week should I count toward? Or skip.</div>
-    <div class="a">3</div>
-    <div class="q">How do you write to someone you just met? Paste two messages that sounded like you.</div>
-    <div class="a">Short, a bit dry. Never "I hope this finds you well". [pastes two messages]</div>
-    <div class="q">Who have you met recently? Names, where, company.</div>
-    <div class="a">Priya, Data Summit, Northwind. Marco, a founders dinner, Fleetly.</div>
-  </div>
+  <p class="sub">Claude asks them one at a time. Example answers shown, yours will differ.</p>
+  <div class="tw"><table>
+    <tr><th>Claude asks</th><th>Example answer</th><th>It uses it for</th></tr>
+    <tr><td>What is this network for?</td><td>Meet founders in logistics who might hire us for AI work.</td><td>Your <code>goal</code>. Breaks ties when ranking who to contact.</td></tr>
+    <tr><td>What name do you sign with?</td><td>Sam</td><td>The sign-off on every draft.</td></tr>
+    <tr><td>Where should the contact folder live?</td><td>Default <code>~/network/people</code></td><td>Where one file per person is stored.</td></tr>
+    <tr><td>Do you use Obsidian?</td><td>Yes</td><td>Adds the board view, or skips it.</td></tr>
+    <tr><td>Weekly outreach target?</td><td>3, or skip</td><td>The weekly count of confirmed messages.</td></tr>
+    <tr><td>How do you write to someone you just met?</td><td>Short, a bit dry. Never "I hope this finds you well". Plus two real messages.</td><td>Your voice files, so drafts sound like you.</td></tr>
+    <tr><td>Who have you met recently?</td><td>Priya, Data Summit, Northwind. Marco, founders dinner, Fleetly.</td><td>Your first contact files.</td></tr>
+  </table></div>
+  <p class="hint">Skip any question to fill it in later. Drafting refuses until the voice files are filled in, because a generic voice is worse than no draft.</p>
 </section>
 
 <section>
@@ -188,6 +206,34 @@ button.copy:focus-visible,a:focus-visible{outline:3px solid var(--warm);outline-
     <div><b>Once a week</b><span>Ask who to follow up with. Pick one or two.</span></div>
     <div><b>When you pick someone</b><span>Ask for a draft. Edit, send, paste the log line.</span></div>
   </div>
+</section>
+
+<section>
+  <span class="eyebrow">Make it yours</span>
+  <h2>Everything you can change.</h2>
+  <p class="sub">All of it is plain text. Edit the file, or ask Claude to edit it for you.</p>
+  <div class="tw"><table>
+    <tr><th>To change</th><th>Edit</th><th>Where</th></tr>
+    <tr><td>Goal, name, weekly target, folders</td><td><code>CONFIG.md</code></td><td><code>~/.claude/network-growth-copilot/</code></td></tr>
+    <tr><td>Words you never use</td><td><code>avoid.md</code></td><td>Same folder, under <code>voice/</code></td></tr>
+    <tr><td>Tone, channel rules, style anchors</td><td><code>networking-outreach.md</code></td><td>Same folder, under <code>voice/</code></td></tr>
+    <tr><td>Fields on a contact</td><td><code>people/README.md</code></td><td>Your contact folder. Add fields freely, keep the existing names.</td></tr>
+    <tr><td>Board view</td><td><code>people.base</code></td><td>Your contact folder. Obsidian only.</td></tr>
+    <tr><td>Redo the questions</td><td>Say "Set up the network growth copilot" again</td><td>It asks before overwriting anything.</td></tr>
+  </table></div>
+  <p class="hint">Keep the five status values (<code>next</code> · <code>waiting</code> · <code>engaged</code> · <code>later</code> · <code>done</code>). The skills rely on them.</p>
+</section>
+
+<section>
+  <span class="eyebrow">Keep it running</span>
+  <h2>Update, fix, remove.</h2>
+  <div class="tw"><table>
+    <tr><th>Want to</th><th>Do</th></tr>
+    <tr><td>Update to the latest version</td><td><code>/plugin marketplace update network-growth-copilot</code></td></tr>
+    <tr><td>Something isn't working</td><td>Check that <code>CONFIG.md</code> points at a folder that exists and the voice files are filled in. That's nearly always it.</td></tr>
+    <tr><td>Start over</td><td>Run the setup again. It shows you what exists and asks first.</td></tr>
+    <tr><td>Remove it</td><td><code>/plugin uninstall network-growth-copilot</code>. Your contact files stay where they are.</td></tr>
+  </table></div>
 </section>
 
 <section>

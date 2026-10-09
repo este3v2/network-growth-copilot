@@ -64,6 +64,24 @@ Claude Code doesn't take audio. Dictate on your phone (or use a voice-memo trans
 
 The skills read markdown files with frontmatter from any folder, so Obsidian is optional. It only adds the board view. Notion would need a Notion connector in Claude Code and hasn't been tested with this kit.
 
+## Make it yours
+
+All of it is plain text under `~/.claude/network-growth-copilot/`, or in your contact folder.
+
+| To change | Edit |
+|---|---|
+| Goal, name, weekly target, folders | `CONFIG.md` |
+| Words you never use | `voice/avoid.md` |
+| Tone options, channel rules | `voice/networking-outreach.md` |
+| Fields on a contact | `README.md` in your contact folder (keep the existing names) |
+| Redo the questions | Say "Set up the network growth copilot" again. It asks before overwriting |
+
+Keep the five status values (`next`, `waiting`, `engaged`, `later`, `done`). The skills rely on them.
+
+## Remove it
+
+`/plugin uninstall network-growth-copilot`. Your contact files stay where they are.
+
 ## If something breaks
 
 First check: your `CONFIG.md` (at `~/.claude/network-growth-copilot/CONFIG.md`) points at a folder that exists, and the voice files are filled in, not template text. Nearly everything else is one of those two. Run the setup again if unsure. It asks before overwriting anything.
