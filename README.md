@@ -26,7 +26,7 @@ Then say: **Set up the network growth copilot**. It asks a few questions and bui
 | [INSTALL.md](INSTALL.md) | Install and first week |
 | [skills/](skills/README.md) | The three skills plus the setup helper, explained |
 | [skills/network-setup/templates/](skills/network-setup/templates) | Contact template, stage rules, board view, sample contact, voice files |
-| [docs/index.html](docs/index.html) | Visual guide with prompts to try |
+| [Visual guide](https://este3v2.github.io/network-growth-copilot/) | Install and usage with prompts to try |
 | [PATTERNS.md](PATTERNS.md) | The design decisions behind it |
 
 ## The data
